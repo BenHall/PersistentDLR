@@ -31,7 +31,7 @@ namespace PersistentDlr.Dlr
             }
 
             catch (Exception ex) {
-                var buffer = "IronRuby failed: " + ex.Message;
+                var buffer = string.Format("IronRuby failed: {0} - {1}", ex.Message, ex.StackTrace);
                 Console.WriteLine(buffer);
 
                 return buffer;
