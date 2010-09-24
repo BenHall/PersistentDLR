@@ -28,8 +28,17 @@ namespace PersistentDlr.Tests
             [Test]
             public void Agent_takes_command_and_returns_response()
             {
-                var response = IssueCommand("127.0.0.1", PORT, "1+1");
+                var response = IssueCommand("127.0.0.1", PORT, "i = 2");
                 Assert.That(response, Is.EqualTo("2"));
+            }
+
+            [Test]
+            public void Agent_takes_multiple_commands_and_maintains_state()
+            {
+                IssueCommand("127.0.0.1", PORT, "i = 2");
+                var response = IssueCommand("127.0.0.1", PORT, "i += 1");
+
+                Assert.That(response, Is.EqualTo("3"));
             }
 
             private string IssueCommand(string ip, int port, string command) {
@@ -41,7 +50,7 @@ namespace PersistentDlr.Tests
                     WriteToStream(networkStream, command);
 
                     readString = GetResponseFromStream(c, networkStream);
-
+                    WriteToStream(networkStream, "quit");
                 }
                 return readString;
             }
@@ -52,10 +61,9 @@ namespace PersistentDlr.Tests
                 {
                     byte[] bytes = new byte[c.ReceiveBufferSize];
 
-                    networkStream.ReadTimeout = 1;
+                    networkStream.ReadTimeout = 20;
                     networkStream.Read(bytes, 0, c.ReceiveBufferSize);
                     
-
                     readString = Encoding.UTF8.GetString(bytes);
                 }
                 return readString.Trim('\0', '\r','\n');
@@ -66,7 +74,6 @@ namespace PersistentDlr.Tests
                 networkStream.Write(sendBytes, 0, sendBytes.Length);
             }
         }
-
 
         [TestFixture]
         public class AgentTests_StartStop

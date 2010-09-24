@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentDlr", "Persistent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentDlr.Tests", "PersistentDlr.Tests\PersistentDlr.Tests.csproj", "{5861FB9E-FD4D-49FC-A421-D34136661984}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentDlr.Console", "PersistentDlr.Console\PersistentDlr.Console.csproj", "{1AB21845-1AF6-448A-97DF-D152B462F25A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{5861FB9E-FD4D-49FC-A421-D34136661984}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5861FB9E-FD4D-49FC-A421-D34136661984}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5861FB9E-FD4D-49FC-A421-D34136661984}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB21845-1AF6-448A-97DF-D152B462F25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB21845-1AF6-448A-97DF-D152B462F25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB21845-1AF6-448A-97DF-D152B462F25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB21845-1AF6-448A-97DF-D152B462F25A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
