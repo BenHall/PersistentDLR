@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 using System.Threading;
 using PersistentDlr.Dlr;
 
@@ -26,11 +27,17 @@ namespace PersistentDlr
                     TcpClient client = _server.AcceptTcpClient();
                     NetworkStream ns = client.GetStream();
 
-                    string request = NetworkStreamHandler.ReadStreamIntoString(ns);
+                    try
+                    {
+                        string request = NetworkStreamHandler.ReadStreamIntoString(ns);
 
-                    while (request!= "quit" && client.Connected) {
                         ExecuteRequest(ns, request);
                         request = NetworkStreamHandler.ReadStreamIntoString(ns);
+                        //ns.Close(1000);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("It's all gone wrong - " + ex.Message);
                     }
 
                     ns.Close();
@@ -43,6 +50,7 @@ namespace PersistentDlr
         private void ExecuteRequest(NetworkStream ns, string request) {
             if (!string.IsNullOrEmpty(request)) {
                 var response = _dlrHost.Execute(request);
+                Console.WriteLine("Result: " + response);
                 WriteResponse(ns, response);
             }
         }

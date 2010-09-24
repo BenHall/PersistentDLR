@@ -20,10 +20,13 @@ namespace PersistentDlr
 
             if (ns.CanRead)
             {
-                var recv = ns.Read(data, 0, data.Length);
-                stringData = Encoding.UTF8.GetString(data, 0, recv);
-                stringData = stringData.Trim(new[] { '\r', '\n', '\0' });
-                Console.WriteLine("Got: " + stringData);
+                if (ns.DataAvailable) {
+                    ns.ReadTimeout = 1;
+                    var recv = ns.Read(data, 0, data.Length);
+                    stringData = Encoding.UTF8.GetString(data, 0, recv);
+                    stringData = stringData.Trim(new[] {'\r', '\n', '\0'});
+                    Console.WriteLine("Got: " + stringData);
+                }
             }
 
             return stringData;

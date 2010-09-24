@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PersistentDlr.Console
+﻿namespace PersistentDlr.Console
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            System.Console.WriteLine("Starting...");
+        static void Main(string[] args) {
+            SetTitle("Starting...");
             Agent agent = new Agent();
             agent.Start();
 
-            System.Console.WriteLine("Started");
+            SetTitle("Started");
 
             System.Console.ReadLine();
             agent.Stop();
+
+            SetTitle("Stopped");
+        }
+
+        private static void SetTitle(string title) {
+            System.Console.Title = "PersistentDlr.Console " + title;
+            System.Console.WriteLine(title);
         }
     }
 }
